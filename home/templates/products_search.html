@@ -1,0 +1,51 @@
+{% extends "homebase.html" %}
+
+{% block title %} Tamam ara :D {% endblock %}
+{% block keywords %} {{ setting.keywords }}  {% endblock %}
+{% block description %}  {{ setting.description }} {% endblock %}
+
+
+{% block content %}
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="index.html">Anasayfa</a></li>
+                <li class="active">Sonuçlar</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+                            <form action="#">
+                                <div class="table-content table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="li-product-thumbnail">Resim</th>
+                                                <th class="cart-product-name">Başlık</th>
+                                                <th class="li-product-price">Kategori</th>
+                                                <th class="li-product-stock-status">Fiyatı</th>
+                                                <th class="li-product-add-cart">Kirala</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for rs in products %}
+                                            <tr>
+                                                <td class="li-product-thumbnail"><a href="/product/{{ rs.id }}/{{ rs.slug }}"><img src="{{ rs.image.url }}" width="200" height="200" alt=""></a></td>
+                                                <td class="li-product-name"><a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a></td>
+                                                <td class="li-product-price"><span class="amount">{{ rs.category }}</span></td>
+                                                <td class="li-product-price"><span class="amount">{{ rs.price }}</span></td>
+                                                <td class="li-product-add-cart"><a href="#">Hemen Kirala</a></td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+    </div>
+</div>
+{% endblock %}

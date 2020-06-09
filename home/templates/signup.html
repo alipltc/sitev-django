@@ -1,0 +1,49 @@
+{% extends "homebase.html" %}
+
+{% block title %} Kayıt Ol {% endblock %}
+{% block keywords %} {{ setting.keywords }}  {% endblock %}
+{% block description %}  {{ setting.description }} {% endblock %}
+
+
+{% block content %}
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="index.html">Anasayfa</a></li>
+                <li class="active">Sıgnup</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-xs-12 col-lg-3 mb-30">
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
+            <form method="post">
+                {% csrf_token %}
+                <div class="login-form">
+                    <h4 class="login-title">Kayıt Ol</h4>
+                    <div class="row">
+                        {% for field in form %}
+                        <div class="col-md-6 col-12 mb-20">
+                            {{ field.label_tag }}<br>
+                            {{ field }}
+                            {% if field.help_text %}
+                            {{ field.help_text }}
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        <div class="col-md-4 col-12 mb-10">
+                        </div>
+                        <div class="col-md-6 col-12 mb-10">
+                            <button type="submit" class="register-button mt-0">Kayıt Ol</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

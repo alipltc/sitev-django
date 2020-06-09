@@ -1,0 +1,86 @@
+{% extends "homebase.html" %}
+
+{% block title %}Kullanıcı-Panel{{ setting.company }} {% endblock %}
+{% block keywords %} {{ setting.keywords }}  {% endblock %}
+{% block description %}  {{ setting.description }} {% endblock %}
+
+
+{% block content %}
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="index.html">Anasayfa</a></li>
+                <li class="active">User Panel</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 order-lg-1 order-2">
+            <div class="li-blog-sidebar pt-25">
+                <h4 class="li-blog-sidebar-title">Kullanıcı Paneli</h4>
+                <ul class="li-blog-archive">
+                    <li><a href="/user">Hesabım</a></li>
+                    <li><a href="productsnew">İlanlarım</a></li>
+                    <li><a href="/logout">Yorumlar</a></li>
+                    <li><a href="/logout">Çıkış Yap</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-10 order-lg-2 order-1">
+            <div class="col-lg-12 pt-25">
+                <h4 class="li-blog-sidebar-title"><i class="fa fa-user"></i> Kullanıcı Paneli</h4>
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}}" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                <table class="table">
+                    <thead>
+                    <tr>
+
+                        <th class="add-cart active">
+                            <div class="category-tags">
+                                    <ul>
+                                        <li><a href="update/">Profili Güncelle</a></li>
+                                        <li><a href="password/">Şifre Değiştir</a></li>
+                                    </ul>
+                            </div></th><br>
+                        <td class="li-product-thumbnail"><img src="{{ profile.image.url }}" width="100" height="100" alt=""></td>
+                    </tr>
+                    <tr>
+                        <th class="li-product-name">Ad Soyad</th>
+                        <td class="li-product-price"><i class="fa fa-user"></i>{{ profile.user_name}}</td>
+                    </tr>
+                    <tr>
+                        <th class="li-product-thumbnail">E-mail</th>
+                        <td class="li-product-price">{{ profile.user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th class="cart-product-name">Telefon</th>
+                        <td class="li-product-price">{{ profile.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th class="li-product-price">Adres</th>
+                        <td class="li-product-price">{{ profile.address }}</td>
+                    </tr>
+                    <tr>
+                        <th class="li-product-stock-status">Şehir</th>
+                        <td class="li-product-price">{{ profile.city }}</td>
+                    </tr>
+                    <tr>
+                        <th class="li-product-stock-status">Ülke</th>
+                        <td class="li-product-price">{{ profile.country }}</td>
+                    </tr>
+
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

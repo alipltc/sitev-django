@@ -1,0 +1,31 @@
+<div class="slider-with-banner">
+                <div class="container">
+                    <div class="row">
+                        <!-- Begin Category Menu Area -->
+                        <div class="col-lg-3">
+                            <!--Category Menu Start-->
+                            <div class="category-menu">
+                                <div class="category-heading">
+                                    <h2 class="categories-toggle"><span>categories</span></h2>
+                                </div>
+                                <div id="cate-toggle" class="category-menu-list">
+                                    {% load mptt_tags %}
+                                    <ul class="hb-dropdown hb-sub-dropdown">
+                                        {% recursetree category %}
+                                        <li class="right-menu"><a href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
+
+                                            {% if not node.is_leaf_node %}
+                                            <ul class="cat-mega-menu">
+                                                <li class="right-menu cat-mega-title">
+                                                   <a href="shop-left-sidebar.html">{{ children }}</a>
+                                                </li>
+                                            </ul>
+                                            {% endif %}
+                                        </li>
+                                        {% endrecursetree %}
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <!--Category Menu End-->
+                        </div>

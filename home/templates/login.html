@@ -1,0 +1,63 @@
+{% extends "homebase.html" %}
+
+{% block title %}Giriş Yap {% endblock %}
+{% block keywords %} {{ setting.keywords }}  {% endblock %}
+{% block description %}  {{ setting.description }} {% endblock %}
+
+
+{% block content %}
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="index.html">Anasayfa</a></li>
+                <li class="active">Login</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-3 mb-30">
+            </div>
+            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
+                <!-- Login Form s-->
+                <form action="" method="post" >
+                    {% csrf_token %}
+                    <div class="login-form">
+                        <h4 class="login-title">Giriş</h4>
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}" style="color: #d43f3a" role="alert">
+                            {{ message|safe }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-md-12 col-12 mb-20">
+                                <label>Kullanıcı Adı</label>
+                                <input class="mb-0" name="username" type="text" placeholder="Kullanıcı adınız...">
+                            </div>
+                            <div class="col-12 mb-20">
+                                <label>Şifre</label>
+                                <input class="mb-0" name="password" type="password" placeholder="Şifreniz...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
+                                    <input type="checkbox" id="remember_me">
+                                    <label for="remember_me">Beni Hatırla</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-10 mb-20 text-left text-md-right">
+                                <a href="#"> Şifreni mi unuttum?</a>
+                            </div>
+                            <div class="col-md-12 center">
+                                <button class="register-button mt-0">Giriş Yap</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </div>
+</div>
+{% endblock %}
