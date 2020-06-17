@@ -17,8 +17,8 @@
               <!-- single-product-wrap start -->
               <div class="single-product-wrap">
                 <div class="product-image">
-                  <a href="single-product.html">
-                    <img src="{{ rs.image.url }}" alt="Li's Product Image">
+                  <a href="/product/{{ rs.id }}/{{ rs.slug }}">
+                    <img src="{{ rs.image.url }}" alt="Li's Product Image" height="180">
                   </a>
                   <span class="sticker">New</span>
                 </div>
@@ -42,9 +42,7 @@
                     <div class="price-box">
                       <span class="new-price">{{ rs.price }} TL</span>
                     </div>
-                    <div class="countersection">
-                      <div class="li-countdown"></div>
-                    </div>
+
                   </div>
                   <div class="add-actions">
                     <ul class="add-actions-link">
@@ -110,8 +108,8 @@
               <!-- single-product-wrap start -->
               <div class="single-product-wrap">
                 <div class="product-image">
-                  <a href="single-product.html">
-                    <img src="{{ rs.image.url }}" alt="Li's Product Image">
+                  <a href="/product/{{ rs.id }}/{{ rs.slug }}">
+                    <img src="{{ rs.image.url }}" alt="Li's Product Image" height="170">
                   </a>
                   <span class="sticker">LAST</span>
                 </div>
@@ -131,7 +129,7 @@
                         </ul>
                       </div>
                     </div>
-                    <h4><a class="product_name" href="single-product.html">{{ rs.title }}</a></h4>
+                    <h4><a class="product_name" href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a></h4>
                     <div class="price-box">
                       <span class="new-price">{{ rs.price }} TL</span>
                     </div>

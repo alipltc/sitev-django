@@ -1,0 +1,65 @@
+{% extends "homebase.html" %}
+
+{% block title %}{{ profile.user_name }} {% endblock %}
+{% block keywords %} {{ setting.keywords }}  {% endblock %}
+{% block description %}  {{ setting.description }} {% endblock %}
+
+
+{% block content %}
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="index.html">Anasayfa</a></li>
+                <li class="active">User Panel</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        {% block sidebar %}
+        {% include "userbar.html" %}
+        {% endblock %}
+        <div class="col-lg-10 order-lg-2 order-1">
+            <div class="col-lg-12 pt-25">
+                <h4 class="li-blog-sidebar-title"><i class="fa fa-user"></i> Kullanıcı Paneli</h4>
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}}" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                <table class="table">
+                    <thead>
+                    <tr>
+
+                        <th class="li-product-thumbnail">Ürün</th>
+                        <th class="cart-product-name">Subject</th>
+                        <th class="li-product-price">Comment</th>
+                        <th class="li-product-remove">date</th>
+                        <th class="li-product-add-cart">detail</th>
+                        <th class="li-product-add-cart">Kaldır</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for rs in comments %}
+                    <tr>
+                        <td class="li-product-name"><a href="/product/{{ rs.product_id }}/{{ rs.product.slug }}">{{ rs.product.title }}</a></td>
+                        <td class="li-product-name">{{ rs.subject }}</td>
+                        <td class="li-product-price"><span class="amount">{{ rs.comment }}</span></td>
+                        <td class="li-product-price"><span class="amount">{{ rs.status }}</span></td>
+                        <td class="li-product-price"><span class="amount">{{ rs.created_at }}</span></td>
+                        <td class="li-product-add-cart"><a href="/user/deletecomment/{{ rs.id }}">Sil</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

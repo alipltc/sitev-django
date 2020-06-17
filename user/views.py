@@ -8,7 +8,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from home.models import UserProfile
-from product.models import Product
+from product.models import Product, Comment
 from user.forms import UserUpdateForm, ProfileUpdateForm, UserProductForm
 
 
@@ -77,10 +77,10 @@ def products_new(request):
             data.save()
 
             messages.success(request,'İlanınız Başarıyla Eklendi <a href=/product/'+str(data.id)+'/'+str(data.slug)+'">İlanı incele-></a>')
-            return HttpResponseRedirect('/user/productsnew')
+            return HttpResponseRedirect('/user/products')
         else:
             messages.error(request, 'Ürün ekleme hatalı...')
-            return HttpResponseRedirect('/user/productsnew')
+            return HttpResponseRedirect('/user/products/new')
     else:
         form = UserProductForm()
         user = request.user
@@ -90,8 +90,55 @@ def products_new(request):
                    }
         return render(request, 'user_products_new.html',context)
 
+def products(request):
+    user = request.user
+    current_user = UserProfile.objects.get(user_id=user.id)
+    products = Product.objects.filter(user_id=user.id)
+    context = {'profile': current_user,
+               'products': products,
+               }
+    return render(request, 'user_products.html',context)
 
+def productsedit(request,id):
+    user = request.user
+    current_user = UserProfile.objects.get(user_id=user.id)
+    products = Product.objects.get(id=id)
+    if request.method == 'POST':
+        form = UserProductForm(request.POST, request.FILES, instance=products)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'İlan Güncelleme Başarılı...')
+            return HttpResponseRedirect('/user/products')
+        else:
+            messages.success(request, 'İlan Form Hatası: '+str(form.errors))
+            return HttpResponseRedirect('/')
+    else:
+        form = UserProductForm(instance=products)
+        context = {'profile': current_user,
+                   'products': products,
+                   'form': form,
+                   }
+        return render(request, 'user_products_new.html', context)
 
+@login_required(login_url='/login')
+def productsdelete(request,id):
+    user = request.user
+    current_user = UserProfile.objects.get(user_id=user.id)
+    Product.objects.filter(id=id).delete()
+    context = {'profile': current_user,
+               'products': products,
+               }
+    messages.success(request, 'İlan Silindi...')
+    return HttpResponseRedirect('/user/products',context)
+
+def comments(request):
+    user = request.user
+    current_user = UserProfile.objects.get(user_id=user.id)
+    comments = Comment.objects.filter(user_id=user.id)
+    context = {'profile': current_user,
+               'comments': comments,
+               }
+    return render(request, 'user_comments.html', context)
 
 
 
